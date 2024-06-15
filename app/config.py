@@ -46,7 +46,7 @@ class Settings(BaseSettings):
     )
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
-    db: DatabaseConfig = DatabaseConfig()
+    db: DatabaseConfig
 
 
 settings = Settings()
