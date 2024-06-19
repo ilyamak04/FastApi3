@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, ApiRouter
+from fastapi import FastAPI
+from fastapi import APIRouter
 from app.config import settings
 
 
@@ -14,12 +15,10 @@ async def lifespan(app: FastAPI):
     await db_helper.dispose()
 
 
-router = ApiRouter()
-app = FastAPI()
+router = APIRouter()
+app = FastAPI(lifespan=lifespan)
 
 app.include_router(
     router,
     prefix=settings.api.prefix,
-    host=settings.run.host,
-    port=settings.run.port,
 )
