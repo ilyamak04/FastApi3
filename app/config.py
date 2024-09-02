@@ -1,9 +1,5 @@
-from pydantic import BaseModel
-from pydantic import PostgresDsn
-from pydantic_settings import (
-    BaseSettings,
-    SettingsConfigDict,
-)
+from pydantic import BaseModel, PostgresDsn
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class RunConfig(BaseModel):
@@ -37,6 +33,10 @@ class DatabaseConfig(BaseModel):
     }
 
 
+class AccessToken(BaseModel):
+    lifetime_seconds: int = 3600
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(".env"),
@@ -47,6 +47,7 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
+    access_token: AccessToken = AccessToken()
 
 
 settings = Settings()
