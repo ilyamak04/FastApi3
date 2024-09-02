@@ -8,5 +8,5 @@ from sqlalchemy.orm import DeclarativeBase
 from ..models import Base
 
 
-class User(SQLAlchemyBaseUserTable, Base):
+class User(Base, SQLAlchemyBaseUserTable):
     __tablename__ = "user"
