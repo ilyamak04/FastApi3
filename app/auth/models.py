@@ -10,3 +10,7 @@ from ..models import Base
 
 class User(Base, SQLAlchemyBaseUserTable):
     __tablename__ = "user"
+
+    @classmethod
+    def get_db(cls, session: AsyncSession):
+        return SQLAlchemyUserDatabase(session, User)
