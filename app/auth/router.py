@@ -23,4 +23,7 @@ auth_router.include_router(
 auth_router.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
 )
+auth_router.include_router(
+    fastapi_users.get_reset_password_router(),
+)
 users_router.include_router(fastapi_users.get_users_router(UserRead, UserUpdate))
