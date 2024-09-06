@@ -3,10 +3,10 @@ from contextlib import asynccontextmanager
 from fastapi import APIRouter, FastAPI
 from fastapi.responses import ORJSONResponse
 
-from app.config import settings
-from app.database import db_helper
+from app.auth.router import auth_router
 
-from .auth.router import router as auth_router
+from .config import settings
+from .database import db_helper
 
 
 @asynccontextmanager
@@ -17,15 +17,12 @@ async def lifespan(app: FastAPI):
     await db_helper.dispose()
 
 
-router = APIRouter()
-
 app = FastAPI(
     lifespan=lifespan,
     default_response_class=ORJSONResponse,
 )
+main_router = APIRouter()
 
-app.include_router(
-    router,
-    prefix=settings.api.prefix,
-)
-router.include_router(router=auth_router)
+main_router.include_router(auth_router)
+
+app.include_router(main_router, prefix=settings.api.prefix_v1)
