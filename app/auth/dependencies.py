@@ -1,18 +1,12 @@
-from typing import TYPE_CHECKING
-
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyUserDatabase
 from fastapi_users_db_sqlalchemy.access_token import SQLAlchemyAccessTokenDatabase
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.auth.models import AccessToken, User
 from app.database import db_helper
 
-from .models import User
 from .service import UserManager
-
-if TYPE_CHECKING:
-    from sqlalchemy.ext.asyncio import AsyncSession
-
-    from .models import AccessToken
 
 
 async def get_user_db(session: AsyncSession = Depends(db_helper.session_getter)):
