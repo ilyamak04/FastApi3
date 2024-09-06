@@ -4,8 +4,8 @@ from typing import Optional
 from fastapi import Request
 from fastapi_users import BaseUserManager, IntegerIDMixin
 
-from ..config import settings
-from .models import User
+from app.auth.models import User
+from app.config import settings
 
 log = logging.getLogger(__name__)
 

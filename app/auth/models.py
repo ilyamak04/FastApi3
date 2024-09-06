@@ -14,7 +14,7 @@ from fastapi_users_db_sqlalchemy.access_token import (
     SQLAlchemyBaseAccessTokenTable,
 )
 
-from ..models import Base
+from app.models import Base
 
 
 class User(Base, SQLAlchemyBaseUserTable):
@@ -27,6 +27,7 @@ class User(Base, SQLAlchemyBaseUserTable):
 
 class AccessToken(Base, SQLAlchemyBaseAccessTokenTable):
     __tablename__ = "access_token"
+
     user_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("user.id", ondelete="cascade"), nullable=False
     )
