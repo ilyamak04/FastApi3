@@ -7,20 +7,15 @@ from fastapi_users.authentication.strategy.db import (
     DatabaseStrategy,
 )
 
+from app.auth.models import AccessToken
 from app.config import settings
 
 from .dependencies import get_access_token_db
 
-if TYPE_CHECKING:
-    from .models import AccessToken
-
-
 bearer_transport = BearerTransport(
     # TODO: update url
-    tokenUrl="auth/jwt/login"
+    tokenUrl=settings.api.bearer_token_url
 )
-
-SECRET = "SECRET"
 
 bearer_transport = BearerTransport(tokenUrl="auth/jwt/login")
 
