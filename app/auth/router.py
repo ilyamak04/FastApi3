@@ -18,6 +18,9 @@ auth_router.include_router(
     fastapi_users.get_auth_router(auth_backend),
 )
 auth_router.include_router(
+    fastapi_users.get_verify_router(UserRead),
+)
+auth_router.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
 )
 users_router.include_router(fastapi_users.get_users_router(UserRead, UserUpdate))
